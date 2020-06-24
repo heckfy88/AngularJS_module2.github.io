@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="ShoppingListCheckOff" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="ShoppingListCheckOff" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="ShoppingListCheckOff" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="ShoppingListCheckOff" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link href="app.js">
+    <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <style>
+        .emptyMessage {
+            font-weight: bold;
+            color: red;
+            font-size: 1.2em;
+        }
+        li {
+            margin-bottom: 7px;
+            font-size: 1.2em;
+        }
+        li > button {
+            margin-left: 6px;
+        }
+        button > span {
+            color: green;
+        }
+    </style>
+</head>
+<body ng-app="ShoppingListCheckOff">
+<div class="container">
+    <h1>Shopping List Check Off</h1>
+
+    <div class="row">
+
+        <!-- To Buy List -->
+        <div class="col-md-6" ng-controller="ToBuyController as toBuy">
+            <h2>To Buy:</h2>
+            <ul>
+                <li ng-repeat="item in toBuy.to_buy_list">
+                    Buy {{item.quantity}} of {{item.name}}
+                    <button class="btn btn-default" ng-click="toBuy.removeItem($index)">
+                        <span class="glyphicon glyphicon-ok"></span> Bought</button>
+                </li>
+            </ul>
+            <div class="emptyMessage" ng-if="toBuy.to_buy_list.length == 0" >Everything's bought</div>
+        </div>
+
+        <!-- Already Bought List -->
+        <div class="col-md-6" ng-controller="AlreadyBoughtController as alreadyBought">
+            <h2>Already Bought:</h2>
+            <ul ng-repeat="item in alreadyBought.bought_list">
+                <li>Bought {{item.quantity}} of {{item.name}}</li>
+            </ul>
+            <div class="emptyMessage" ng-if="alreadyBought.bought_list.length == 0 ">Nothing's bought</div>
+        </div>
+    </div>
+</div>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+   <script src="lib/angular/angular.js"></script>
+   <script src="lib/angular-route/angular-route.js"></script>
+   <script src="app.js"></script>
+   <script src="core/version/version.js"></script>
+   <script src="core/version/version-directive.js"></script>
+   <script src="core/version/interpolate-filter.js"></script>
+</body>
+</html>
